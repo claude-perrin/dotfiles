@@ -5,6 +5,7 @@ battery=(
   icon.font="$FONT:Regular:19.0"
   padding_right=5
   padding_left=3
+  icon.padding_right=9
   label.width=34
   label.align=right
   label.drawing=on
