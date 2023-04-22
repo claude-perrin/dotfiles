@@ -14,6 +14,7 @@ spotify_anchor=(
   label.drawing=off
   drawing=off
   y_offset=2
+  icon.color=$GREEN
 )
 
 spotify_cover=(
