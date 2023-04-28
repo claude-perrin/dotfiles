@@ -66,5 +66,6 @@ echo "yabai configuration loaded.."
 
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add title=' Preferences$' manage=off
+yabai -m rule --add title='^Finder$' manage=off
 #yabai -m rule --add title='^Telegram$' manage=off
 

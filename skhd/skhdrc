@@ -105,6 +105,7 @@ ctrl - s : yabai -m space --create
 
 fn + ctrl - g : open -a 'Google Chrome'
 fn + ctrl - t : open -a 'Iterm'
+fn + ctrl - f : open -a 'Finder'
 
 
 
