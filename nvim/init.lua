@@ -66,5 +66,6 @@ telescope.setup {
 }
 
 
+
 require('nvim-autopairs').setup{} -- Add this line
 --require('nvim-tree').setup{}
