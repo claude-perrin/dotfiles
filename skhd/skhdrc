@@ -86,7 +86,7 @@ shift + ctrl - n : yabai -m space --create && \
 # destroy desktop
 shift + ctrl - w : yabai -m space --destroy
 # create space
-ctrl - s : yabai -m space --create
+fn + ctrl - s : yabai -m space --create
 
 
 # stack spaces
