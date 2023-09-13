@@ -38,7 +38,7 @@ yabai -m config                                 \
     window_animation_frame_rate  120            \
     window_opacity_duration      0.0            \
     active_window_opacity        1.00            \
-    normal_window_opacity        0.90           \
+    normal_window_opacity        0.94           \
     window_opacity               on             \
     insert_feedback_color        0xffd75f5f     \
     active_window_border_color   0xff775759     \
@@ -66,6 +66,6 @@ echo "yabai configuration loaded.."
 
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add title=' Preferences$' manage=off
-yabai -m rule --add title='^Finder$' manage=off
+yabai -m rule --add app='^Finder$' manage=off
 #yabai -m rule --add title='^Telegram$' manage=off
 

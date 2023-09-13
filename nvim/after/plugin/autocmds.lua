@@ -22,13 +22,22 @@ api.nvim_create_autocmd(
 )
 
 
-local cmd = vim.cmd
--- Start NERDTree when nvim is started
+api.nvim_create_autocmd(
+{"VimEnter"},
+{pattern = "*", command = "NERDTree | wincmd p"}
+)
 
-cmd [[
-autocmd VimEnter * NERDTree | wincmd p  
-autocmd VimLeave * call system("xclip -selection clipboard -i", getreg('+'))
-]]
+api.nvim_create_autocmd(
+{"VimLeave"},
+{pattern = "*", command = "call system('xclip -selection clipboard -i', getreg('+'))"}
+)
+-- local cmd = vim.cmd
+-- -- Start NERDTree when nvim is started
+--
+-- cmd [[
+-- autocmd VimEnter * NERDTree | wincmd p
+-- autocmd VimLeave * call system("xclip -selection clipboard -i", getreg('+'))
+-- ]]
 
 -- Exit vim if NERDTree is the last windows
 --cmd [[

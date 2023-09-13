@@ -13,8 +13,8 @@ return require('packer').startup(function(use)
 
     use { 'mhinz/vim-startify' }                       -- start screen
     use { 'DanilaMihailov/beacon.nvim' }               -- cursor jump, highlightning the line
-
-
+    use { 'liuchengxu/vista.vim' }                     -- Search of LSP symobls, fucntion jumps
+    use { 'aserebryakov/vim-todo-lists' }              -- ToDo
     use {
         'nvim-lualine/lualine.nvim',                     -- statusline
         requires = {
@@ -73,12 +73,12 @@ return require('packer').startup(function(use)
 
       -- [[ Python ]]
       use {
-        'dense-analysis/ale',         -- error highlight
+--        'dense-analysis/ale',         -- error highlight
         'Vimjas/vim-python-pep8-indent',  --"better indenting for python
         'roxma/nvim-yarp',  -- " dependency of ncm2
         'ncm2/ncm2', -- " awesome autocomplete plugin
         'Shougo/deoplete.nvim', -- "Async autocompletion
-        'zchee/deoplete-jedi',-- " Python autocompletion
+--        'zchee/deoplete-jedi',-- " Python autocompletion
         'Shougo/context_filetype.vim', -- " Completion from other opened files
         'davidhalter/jedi-vim', -- " Just to add the python go-to-definition and similar features, autocompletion
         'tpope/vim-surround',
@@ -86,9 +86,13 @@ return require('packer').startup(function(use)
         'jeetsukumaran/vim-indentwise',--" Indentation based movements
         'mileszs/ack.vim', --" Ack code search (requires ack installed in the system)
         'lilydjwg/colorizer',--" Paint css colors with the real color
-        'tell-k/vim-autopep8', --"autopep8
+ --       'tell-k/vim-autopep8', --"autopep8
       }
 
+      -- [[Ansible]]
+      use {
+--          'yaegassy/coc-ansible'
+      }
 
       config = {
           package_root = vim.fn.stdpath('config') .. '/site/pack'

@@ -3,7 +3,6 @@
 -- is called; otherwise, it will default to "\"
 vim.g.mapleader = ","
 vim.g.localleader = "\\"
-
 -- IMPORTS
 require('vars')      -- Variables
 require('opts')      -- Options
@@ -19,7 +18,7 @@ require('lualine').setup {
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the four listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "help", "python", "yaml", "json" },
+  ensure_installed = { "c", "lua", "vim", "python", "yaml", "json" },
 
   -- Automatically install missing parsers when entering buffer
   auto_install = true,

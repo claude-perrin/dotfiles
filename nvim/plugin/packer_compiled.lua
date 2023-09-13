@@ -74,15 +74,15 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  LuaSnip = {
+    loaded = true,
+    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
+  },
   ["ack.vim"] = {
     loaded = true,
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/ack.vim",
     url = "https://github.com/mileszs/ack.vim"
-  },
-  ale = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/ale",
-    url = "https://github.com/dense-analysis/ale"
   },
   ["beacon.nvim"] = {
     loaded = true,
@@ -124,15 +124,15 @@ _G.packer_plugins = {
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/context_filetype.vim",
     url = "https://github.com/Shougo/context_filetype.vim"
   },
-  ["deoplete-jedi"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/deoplete-jedi",
-    url = "https://github.com/zchee/deoplete-jedi"
-  },
   ["deoplete.nvim"] = {
     loaded = true,
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/deoplete.nvim",
     url = "https://github.com/Shougo/deoplete.nvim"
+  },
+  ["friendly-snippets"] = {
+    loaded = true,
+    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+    url = "https://github.com/rafamadriz/friendly-snippets"
   },
   ["gruvbox-material"] = {
     loaded = true,
@@ -154,15 +154,35 @@ _G.packer_plugins = {
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/jedi-vim",
     url = "https://github.com/davidhalter/jedi-vim"
   },
+  ["lsp-zero.nvim"] = {
+    loaded = true,
+    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
+    url = "https://github.com/VonHeikemen/lsp-zero.nvim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["mason-lspconfig.nvim"] = {
+    loaded = true,
+    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+  },
+  ["mason.nvim"] = {
+    loaded = true,
+    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
+  },
   ncm2 = {
     loaded = true,
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/ncm2",
     url = "https://github.com/ncm2/ncm2"
+  },
+  nerdcommenter = {
+    loaded = true,
+    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/nerdcommenter",
+    url = "https://github.com/preservim/nerdcommenter"
   },
   nerdtree = {
     loaded = true,
@@ -183,6 +203,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/nvim-dap",
     url = "https://github.com/mfussenegger/nvim-dap"
+  },
+  ["nvim-lspconfig"] = {
+    loaded = true,
+    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -226,11 +251,6 @@ _G.packer_plugins = {
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
-  ["vim-autopep8"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/vim-autopep8",
-    url = "https://github.com/tell-k/vim-autopep8"
-  },
   ["vim-devicons"] = {
     loaded = true,
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/vim-devicons",
@@ -265,6 +285,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
+  },
+  ["vim-todo-lists"] = {
+    loaded = true,
+    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/vim-todo-lists",
+    url = "https://github.com/aserebryakov/vim-todo-lists"
+  },
+  ["vista.vim"] = {
+    loaded = true,
+    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/vista.vim",
+    url = "https://github.com/liuchengxu/vista.vim"
   }
 }
 
