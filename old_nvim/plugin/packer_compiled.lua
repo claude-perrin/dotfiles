@@ -79,16 +79,6 @@ _G.packer_plugins = {
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  ["ack.vim"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/ack.vim",
-    url = "https://github.com/mileszs/ack.vim"
-  },
-  ["beacon.nvim"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/beacon.nvim",
-    url = "https://github.com/DanilaMihailov/beacon.nvim"
-  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -114,21 +104,6 @@ _G.packer_plugins = {
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
-  colorizer = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/colorizer",
-    url = "https://github.com/lilydjwg/colorizer"
-  },
-  ["context_filetype.vim"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/context_filetype.vim",
-    url = "https://github.com/Shougo/context_filetype.vim"
-  },
-  ["deoplete.nvim"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/deoplete.nvim",
-    url = "https://github.com/Shougo/deoplete.nvim"
-  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -139,20 +114,11 @@ _G.packer_plugins = {
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/gruvbox-material",
     url = "https://github.com/sainnhe/gruvbox-material"
   },
-  ["gv.vim"] = {
+  ["indent-blankline.nvim"] = {
+    config = { "\27LJ\2\n³\1\0\2\6\0\n\0\0206\2\0\0'\4\1\0B\2\2\0029\2\2\2'\4\3\0B\2\2\0016\2\4\0006\4\5\0009\4\6\0049\4\a\4'\5\3\0&\4\5\4B\2\2\0016\2\0\0'\4\b\0B\2\2\0029\2\t\2\18\4\1\0B\2\2\1K\0\1\0\nsetup\21indent_blankline\17base46_cache\6g\bvim\vdofile\14blankline\18load_mappings\15core.utils\frequire\0" },
     loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/gv.vim",
-    url = "https://github.com/junegunn/gv.vim"
-  },
-  indentLine = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/indentLine",
-    url = "https://github.com/Yggdroot/indentLine"
-  },
-  ["jedi-vim"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/jedi-vim",
-    url = "https://github.com/davidhalter/jedi-vim"
+    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
   ["lsp-zero.nvim"] = {
     loaded = true,
@@ -174,20 +140,10 @@ _G.packer_plugins = {
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
-  ncm2 = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/ncm2",
-    url = "https://github.com/ncm2/ncm2"
-  },
   nerdcommenter = {
     loaded = true,
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/nerdcommenter",
     url = "https://github.com/preservim/nerdcommenter"
-  },
-  nerdtree = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/nerdtree",
-    url = "https://github.com/preservim/nerdtree"
   },
   ["nvim-autopairs"] = {
     loaded = true,
@@ -198,11 +154,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
-  },
-  ["nvim-dap"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/nvim-dap",
-    url = "https://github.com/mfussenegger/nvim-dap"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -219,11 +170,6 @@ _G.packer_plugins = {
     needs_bufread = false,
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
-  },
-  ["nvim-yarp"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/nvim-yarp",
-    url = "https://github.com/roxma/nvim-yarp"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -256,45 +202,10 @@ _G.packer_plugins = {
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/vim-devicons",
     url = "https://github.com/ryanoasis/vim-devicons"
   },
-  ["vim-fugitive"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/vim-fugitive",
-    url = "https://github.com/tpope/vim-fugitive"
-  },
-  ["vim-indent-object"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/vim-indent-object",
-    url = "https://github.com/michaeljsmith/vim-indent-object"
-  },
-  ["vim-indentwise"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/vim-indentwise",
-    url = "https://github.com/jeetsukumaran/vim-indentwise"
-  },
-  ["vim-python-pep8-indent"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/vim-python-pep8-indent",
-    url = "https://github.com/Vimjas/vim-python-pep8-indent"
-  },
   ["vim-startify"] = {
     loaded = true,
     path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/vim-startify",
     url = "https://github.com/mhinz/vim-startify"
-  },
-  ["vim-surround"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/vim-surround",
-    url = "https://github.com/tpope/vim-surround"
-  },
-  ["vim-todo-lists"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/vim-todo-lists",
-    url = "https://github.com/aserebryakov/vim-todo-lists"
-  },
-  ["vista.vim"] = {
-    loaded = true,
-    path = "/Users/viktor/.local/share/nvim/site/pack/packer/start/vista.vim",
-    url = "https://github.com/liuchengxu/vista.vim"
   }
 }
 
@@ -303,6 +214,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for telescope.nvim]], true)
 try_loadstring("\27LJ\2\nS\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\19live_grep_args\19load_extension\14telescope\frequire\0", "config", "telescope.nvim")
 time([[Config for telescope.nvim]], false)
+-- Config for: indent-blankline.nvim
+time([[Config for indent-blankline.nvim]], true)
+try_loadstring("\27LJ\2\n³\1\0\2\6\0\n\0\0206\2\0\0'\4\1\0B\2\2\0029\2\2\2'\4\3\0B\2\2\0016\2\4\0006\4\5\0009\4\6\0049\4\a\4'\5\3\0&\4\5\4B\2\2\0016\2\0\0'\4\b\0B\2\2\0029\2\t\2\18\4\1\0B\2\2\1K\0\1\0\nsetup\21indent_blankline\17base46_cache\6g\bvim\vdofile\14blankline\18load_mappings\15core.utils\frequire\0", "config", "indent-blankline.nvim")
+time([[Config for indent-blankline.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
