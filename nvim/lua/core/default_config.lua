@@ -46,7 +46,7 @@ M.ui = {
     overriden_modules = nil,
   },
 
-  -- nvdash (dashboard)
+-- nvdash (dashboard)
   nvdash = {
     load_on_startup = false,
 
@@ -71,16 +71,16 @@ M.ui = {
       { "  Mappings", "Spc c h", "NvCheatsheet" },
     },
   },
+--
+   cheatsheet = { theme = "grid" }, -- simple/grid
 
-  cheatsheet = { theme = "grid" }, -- simple/grid
-
-  lsp = {
-    -- show function signatures i.e args as you type
-    signature = {
-      disabled = false,
-      silent = true, -- silences 'no signature help available' message from appearing
-    },
-  },
+   lsp = {
+     -- show function signatures i.e args as you type
+     signature = {
+       disabled = false,
+       silent = true, -- silences 'no signature help available' message from appearing
+     },
+   },
 }
 
 M.plugins = "" -- path i.e "custom.plugins", so make custom/plugins.lua file
