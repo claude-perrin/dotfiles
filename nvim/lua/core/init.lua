@@ -21,7 +21,6 @@ opt.shiftwidth = 2
 opt.smartindent = true
 opt.tabstop = 2
 opt.softtabstop = 2
-opt.scrolloff = 4                -- int:  Min num lines of context
 
 opt.fillchars = { eob = " " }
 opt.ignorecase = true
@@ -49,6 +48,7 @@ opt.updatetime = 250
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
 opt.whichwrap:append "<>[]hl"
+
 
 g.mapleader = ","
 
@@ -114,3 +114,5 @@ local new_cmd = vim.api.nvim_create_user_command
 new_cmd("NvChadUpdate", function()
   require "nvchad.updater"()
 end, {})
+
+

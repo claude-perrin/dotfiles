@@ -64,4 +64,14 @@ require("lspconfig").lua_ls.setup {
   },
 }
 
+require'lspconfig'.rust_analyzer.setup{
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = false;
+      }
+    }
+  }
+}
+
 return M

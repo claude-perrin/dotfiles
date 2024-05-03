@@ -145,6 +145,20 @@ local default_plugins = {
     end,
   },
 
+
+  -- Rust plugins
+
+  {
+    "simrat39/rust-tools.nvim",
+  },
+
+
+  -- Prisma lsp
+  {
+    "prisma/vim-prisma",
+  },
+
+
   -- load luasnips + cmp related in insert mode only
   {
     "hrsh7th/nvim-cmp",
