@@ -40,7 +40,8 @@ The bar is positioned at the **top** of the screen with a transparent background
 │   ├── spotify.sh        # Spotify now-playing widget (center)
 │   ├── battery.sh        # Battery indicator (right)
 │   ├── layout.sh         # Layout indicator (right)
-│   ├── calendar.sh       # Date/time display (right)
+│   ├── calendar.sh       # Date/time display + events popup (right)
+│   ├── calendar_event.sh # Next calendar event (right)
 │   ├── weather.sh        # Weather widget (right)
 │   ├── brew.sh           # Homebrew updates (disabled)
 │   ├── github.sh         # GitHub notifications (disabled)
@@ -50,7 +51,8 @@ The bar is positioned at the **top** of the screen with a transparent background
 ├── plugins/              # Scripts executed by items
 │   ├── spotify.sh        # Spotify playback state & controls
 │   ├── battery.sh        # Battery level & charging state
-│   ├── calendar.sh       # Date/time formatting
+│   ├── calendar.sh       # Date/time formatting + events popup
+│   ├── calendar_event.sh # Next event via icalBuddy
 │   ├── weather.sh        # Weather data fetching
 │   ├── space.sh          # Space change handling
 │   ├── yabai.sh          # Yabai WM integration
@@ -158,7 +160,10 @@ Battery level indicator with charging state.
 Window manager layout indicator.
 
 #### Calendar (`items/calendar.sh`)
-Date and time display.
+Date and time display. Hovering shows a popup with the next 5 upcoming calendar events (times + titles). Uses 5 fixed popup item slots (`calendar.event.1` through `calendar.event.5`), shown/hidden dynamically. Requires `icalBuddy` for popup content.
+
+#### Calendar Event (`items/calendar_event.sh`)
+Displays the next upcoming calendar event in the bar (icon + truncated title + time). Hidden when no events are upcoming. Requires `icalBuddy` (`brew install ical-buddy`). Updates every 5 minutes and on system wake.
 
 #### Weather (`items/weather.sh`)
 Weather information widget. Location is auto-detected via IP geolocation. Displays only the weather condition icon and temperature (no city name). Aligned vertically with `y_offset=2` to match adjacent items.
@@ -200,6 +205,28 @@ SENDER=routine        → scroll() for state slider, update() for others
 SENDER=forced         → runs update
 SENDER=*              → update (catches spotify_change, spotify_init, etc.)
 ```
+
+### Calendar Plugin (`plugins/calendar.sh`)
+
+Handles date/time display and the upcoming events popup.
+
+**Functions:**
+- `update()` — Sets date as icon, time as label (red after 9 PM)
+- `popup()` — Shows/hides the calendar popup
+- `update_popup()` — Fetches next 5 events via `icalBuddy`, populates popup slots
+- `truncate_text()` — Truncates long event titles with ellipsis
+
+**Event Routing:**
+```
+SENDER=mouse.entered       → show popup + update_popup
+SENDER=mouse.exited        → hide popup
+SENDER=mouse.exited.global → hide popup
+SENDER=routine/forced/*    → update date/time
+```
+
+### Calendar Event Plugin (`plugins/calendar_event.sh`)
+
+Displays the next upcoming event in the bar. Fetches via `icalBuddy`, parses title and time, hides item when no events.
 
 ---
 

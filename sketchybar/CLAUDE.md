@@ -61,5 +61,5 @@ Before implementing any changes, always read `DOCS.md` for the SketchyBar API re
 
 ## Active vs Disabled Items
 
-Enabled (sourced in `sketchybarrc`): apple, spaces, front_app, spotify (center), battery, layout, calendar, weather.
+Enabled (sourced in `sketchybarrc`): apple, spaces, front_app, spotify (center), battery, layout, calendar, calendar_event, weather.
 Commented out: brew, github, volume, cpu, netstat.

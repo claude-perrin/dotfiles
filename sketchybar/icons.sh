@@ -37,6 +37,9 @@ BATTERY_25=􀛩
 BATTERY_0=􀛪
 BATTERY_CHARGING=􀢋
 
+# Calendar Icons
+CALENDAR_EVENT=􀧞
+
 # Volume Icons
 VOLUME_100=􀊩
 VOLUME_66=􀊧
