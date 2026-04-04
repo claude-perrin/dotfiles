@@ -8,110 +8,153 @@ if ! command -v icalBuddy &>/dev/null; then
   exit 0
 fi
 
-MAX_TITLE_LEN=30
 MAX_POPUP_TITLE=35
-POPUP_SLOTS=5
+TOTAL_POPUP_SLOTS=8
 
 truncate_text() {
-  local text="$1"
-  local max="$2"
-  if [ ${#text} -gt $max ]; then
-    echo "${text:0:$((max-1))}…"
-  else
-    echo "$text"
-  fi
+  local text="$1" max="$2"
+  [ ${#text} -gt $max ] && echo "${text:0:$((max-1))}…" || echo "$text"
 }
 
-# Parse day prefix and time from an icalBuddy time line like "today at 15:30 - 16:00"
-parse_time_line() {
-  local time_line="$1"
+# Convert "today at HH:MM..." or "tomorrow at HH:MM..." to sort key (minutes since midnight).
+# Strips leading "due: " if present. All-day / unrecognized → 0.
+compute_sort_key() {
+  local line="${1#due: }"
+  local off=0 t=""
+  if [[ "$line" == tomorrow* ]]; then
+    off=1440; t=$(echo "$line" | sed 's/^tomorrow at //;s/ -.*//')
+  elif [[ "$line" == today* ]]; then
+    off=0;    t=$(echo "$line" | sed 's/^today at //;s/ -.*//')
+  else
+    echo 0; return
+  fi
+  local h m
+  h=$(echo "$t" | cut -d: -f1); m=$(echo "$t" | cut -d: -f2)
+  echo $((off + 10#$h * 60 + 10#$m))
+}
+
+# Sets DAY and TIME globals from a time line (strips "due: " prefix).
+parse_time_fields() {
+  local line="${1#due: }"
   DAY="" TIME=""
-  if [[ "$time_line" == tomorrow* ]]; then
+  if [[ "$line" == tomorrow* ]]; then
     DAY="Tomorrow"
-    TIME=$(echo "$time_line" | sed 's/^tomorrow at //' | sed 's/ -.*//')
-  elif [[ "$time_line" == today* ]]; then
-    DAY=""
-    TIME=$(echo "$time_line" | sed 's/^today at //' | sed 's/ -.*//')
-  else
-    TIME=$(echo "$time_line" | sed 's/ -.*//')
+    TIME=$(echo "$line" | sed 's/^tomorrow at //;s/ -.*//')
+  elif [[ "$line" == today* ]]; then
+    TIME=$(echo "$line" | sed 's/^today at //;s/ -.*//')
   fi
 }
 
-update() {
-  local output
-  output=$(icalBuddy -n -li 1 -nc -ea -df "" -tf "%H:%M" \
+# Prints sorted "SORTKEY|DISPLAY|COLOR" lines for events + timed reminders.
+build_combined() {
+  local -a items=()
+
+  # --- Calendar events (today + tomorrow) ---
+  local ev
+  ev=$(icalBuddy -n -li 6 -nc -ea -df "" -tf "%H:%M" \
     -iep "title,datetime" -b "" eventsToday+1 2>/dev/null)
 
-  if [ -z "$output" ]; then
-    sketchybar --set $NAME drawing=off
-    return
+  if [ -n "$ev" ]; then
+    local etitle=""
+    while IFS= read -r line; do
+      if [[ "$line" =~ ^[[:space:]] ]]; then
+        [ -z "$etitle" ] && continue
+        local tl key display
+        tl=$(echo "$line" | sed 's/^[[:space:]]*//')
+        key=$(compute_sort_key "$tl")
+        parse_time_fields "$tl"
+        etitle=$(truncate_text "$etitle" $MAX_POPUP_TITLE)
+        if [ -n "$DAY" ] && [ -n "$TIME" ]; then
+          display="$DAY $TIME  $etitle"
+        elif [ -n "$TIME" ]; then
+          display="$TIME  $etitle"
+        else
+          display="All day  $etitle"
+        fi
+        items+=("${key}|${display}|${WHITE}")
+        etitle=""
+      else
+        etitle=$(echo "$line" | sed 's/^[[:space:]]*//')
+      fi
+    done <<< "$ev"
   fi
 
-  local title time_line
-  title=$(echo "$output" | head -1 | sed 's/^[[:space:]]*//')
-  time_line=$(echo "$output" | sed -n '2p' | sed 's/^[[:space:]]*//')
+  # --- Reminders: only those with an explicit due time today or tomorrow ---
+  local rem
+  rem=$(icalBuddy -n -li 6 -nc -ea -df "" -tf "%H:%M" \
+    -iep "title,dueDate" -b "" uncompletedTasks 2>/dev/null)
 
-  parse_time_line "$time_line"
-  title=$(truncate_text "$title" $MAX_TITLE_LEN)
-
-  local label
-  if [ -n "$DAY" ] && [ -n "$TIME" ]; then
-    label="${title}  ${DAY} ${TIME}"
-  elif [ -n "$TIME" ]; then
-    label="${title}  ${TIME}"
-  else
-    label="${title}  All day"
+  if [ -n "$rem" ]; then
+    local rtitle=""
+    while IFS= read -r line; do
+      if [[ "$line" =~ ^[[:space:]] ]]; then
+        [ -z "$rtitle" ] && continue
+        local dl
+        dl=$(echo "$line" | sed 's/^[[:space:]]*//')
+        # Only include if due today or tomorrow with a specific time
+        if [[ "$dl" == "due: today at "* ]] || [[ "$dl" == "due: tomorrow at "* ]]; then
+          local key display
+          key=$(compute_sort_key "$dl")
+          parse_time_fields "$dl"
+          rtitle=$(truncate_text "$rtitle" $MAX_POPUP_TITLE)
+          [ -n "$DAY" ] && display="$DAY $TIME  $rtitle" || display="$TIME  $rtitle"
+          items+=("${key}|${display}|${YELLOW}")
+        fi
+        rtitle=""
+      else
+        # New title — previous one (if any) had no due-date line, so skip it
+        rtitle=$(echo "$line" | sed 's/^[[:space:]]*//')
+      fi
+    done <<< "$rem"
   fi
 
-  sketchybar --set $NAME drawing=on label="$label"
+  [ ${#items[@]} -gt 0 ] && printf '%s\n' "${items[@]}" | sort -t'|' -k1 -n
 }
 
 popup() {
   sketchybar -m --set calendar.event popup.drawing=$1
 }
 
-update_popup() {
-  local output
-  output=$(icalBuddy -n -li $POPUP_SLOTS -nc -ea -df "" -tf "%H:%M" \
-    -iep "title,datetime" -b "" eventsToday+1 2>/dev/null)
+update() {
+  local first
+  first=$(build_combined | head -1)
 
-  if [ -z "$output" ]; then
+  if [ -z "$first" ]; then
+    sketchybar --set $NAME drawing=off
+    return
+  fi
+
+  local display color
+  display=$(echo "$first" | cut -d'|' -f2)
+  color=$(echo "$first"  | cut -d'|' -f3)
+  sketchybar --set $NAME drawing=on label="$display" label.color="$color"
+}
+
+update_popup() {
+  local sorted
+  sorted=$(build_combined)
+
+  if [ -z "$sorted" ]; then
     sketchybar --set calendar.popup.1 drawing=on \
                label="No upcoming events" label.color=$GREY
-    for i in $(seq 2 $POPUP_SLOTS); do
+    for i in $(seq 2 $TOTAL_POPUP_SLOTS); do
       sketchybar --set calendar.popup.$i drawing=off
     done
     return
   fi
 
   local slot=1
-  local title=""
-  while IFS= read -r line; do
-    if [[ "$line" =~ ^[[:space:]] ]]; then
-      local time_line display
-      time_line=$(echo "$line" | sed 's/^[[:space:]]*//')
+  while IFS= read -r item; do
+    local disp color
+    disp=$(echo "$item"  | cut -d'|' -f2)
+    color=$(echo "$item" | cut -d'|' -f3)
+    sketchybar --set calendar.popup.$slot drawing=on \
+               label="$disp" label.color="$color"
+    slot=$((slot + 1))
+    [ $slot -gt $TOTAL_POPUP_SLOTS ] && break
+  done <<< "$sorted"
 
-      parse_time_line "$time_line"
-      title=$(truncate_text "$title" $MAX_POPUP_TITLE)
-
-      if [ -n "$DAY" ] && [ -n "$TIME" ]; then
-        display="$DAY $TIME  $title"
-      elif [ -n "$TIME" ]; then
-        display="$TIME  $title"
-      else
-        display="All day  $title"
-      fi
-
-      sketchybar --set calendar.popup.$slot drawing=on \
-                 label="$display" label.color=$WHITE
-      slot=$((slot + 1))
-      [ $slot -gt $POPUP_SLOTS ] && break
-    else
-      title=$(echo "$line" | sed 's/^[[:space:]]*//')
-    fi
-  done <<< "$output"
-
-  while [ $slot -le $POPUP_SLOTS ]; do
+  while [ $slot -le $TOTAL_POPUP_SLOTS ]; do
     sketchybar --set calendar.popup.$slot drawing=off
     slot=$((slot + 1))
   done

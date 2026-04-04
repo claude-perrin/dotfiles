@@ -163,7 +163,7 @@ Window manager layout indicator.
 Date and time display. Hovering shows a popup with the next 5 upcoming calendar events (times + titles). Uses 5 fixed popup item slots (`calendar.event.1` through `calendar.event.5`), shown/hidden dynamically. Requires `icalBuddy` for popup content.
 
 #### Calendar Event (`items/calendar_event.sh`)
-Displays the next upcoming calendar event in the bar (icon + truncated title + time). Hidden when no events are upcoming. Requires `icalBuddy` (`brew install ical-buddy`). Updates every 5 minutes and on system wake.
+Displays the next item from a merged, time-sorted list of calendar events and Reminders app tasks that have an explicit due time today or tomorrow. Calendar events appear in white; reminders in yellow. Hidden when nothing is upcoming. Requires `icalBuddy` (`brew install ical-buddy`). Updates every 5 minutes and on system wake. Uses 8 fixed popup slots (`calendar.popup.1`–`calendar.popup.8`).
 
 #### Weather (`items/weather.sh`)
 Weather information widget. Location is auto-detected via IP geolocation. Displays only the weather condition icon and temperature (no city name). Aligned vertically with `y_offset=2` to match adjacent items.
@@ -226,7 +226,9 @@ SENDER=routine/forced/*    → update date/time
 
 ### Calendar Event Plugin (`plugins/calendar_event.sh`)
 
-Displays the next upcoming event in the bar. Fetches via `icalBuddy`, parses title and time, hides item when no events.
+Merges calendar events (`eventsToday+1`) and Reminders app tasks (`uncompletedTasks`) into a single time-sorted list. Reminders are included **only** if they have an explicit due time today or tomorrow (e.g. `due: today at 14:30`) — reminders with no time or only a date are excluded.
+
+Bar label shows the chronologically next item. Calendar events appear in white; reminders in yellow. Popup (hover) shows up to 8 sorted slots total. `build_combined()` is the central function: fetches both sources, parses sort keys as minutes-since-midnight (tomorrow offset +1440), and emits `SORTKEY|DISPLAY|COLOR` lines for piping through `sort`.
 
 ---
 
@@ -266,6 +268,15 @@ Defined in `icons.sh` using **SF Symbols**. Install with: `brew install --cask s
 - **Yabai:** Stack, Fullscreen Zoom, Parent Zoom, Float, Grid
 - **Battery:** 100%, 75%, 50%, 25%, 0%, Charging
 - **Volume:** 100%, 66%, 33%, 10%, Mute
+
+### App Font (`sketchybar-app-font`)
+
+Used in spaces labels to show app icons per space. Font version: **v2.0.56**.
+
+- Font file: `~/Library/Fonts/sketchybar-app-font.ttf`
+- App-to-icon mapping: `plugins/icon_map.sh`
+- Apps map to ligature strings like `:app_name:` rendered by the font
+- **Claude** is mapped to `:claude:` — shows the Claude icon when Claude.app is open in a space
 
 ---
 

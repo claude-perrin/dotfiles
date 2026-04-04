@@ -11,7 +11,7 @@ calendar_event=(
   padding_left=$PADDINGS
   padding_right=$PADDINGS
   drawing=off
-  update_freq=300
+  update_freq=60
   popup.align=center
   click_script="$POPUP_SCRIPT"
   script="$PLUGIN_DIR/calendar_event.sh"
@@ -44,4 +44,10 @@ sketchybar --add item calendar.event right                          \
            --add item calendar.popup.4 popup.calendar.event         \
            --set calendar.popup.4 "${calendar_popup_item[@]}"       \
            --add item calendar.popup.5 popup.calendar.event         \
-           --set calendar.popup.5 "${calendar_popup_item[@]}"
+           --set calendar.popup.5 "${calendar_popup_item[@]}"       \
+           --add item calendar.popup.6 popup.calendar.event         \
+           --set calendar.popup.6 "${calendar_popup_item[@]}"       \
+           --add item calendar.popup.7 popup.calendar.event         \
+           --set calendar.popup.7 "${calendar_popup_item[@]}"       \
+           --add item calendar.popup.8 popup.calendar.event         \
+           --set calendar.popup.8 "${calendar_popup_item[@]}"

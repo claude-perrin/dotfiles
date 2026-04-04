@@ -5,7 +5,7 @@ PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
 SPOTIFY_DISPLAY_CONTROLS="${1:-false}"
 COVER_PATH="/tmp/cover.jpg"
 COVER_URL_CACHE="/tmp/spotify_cover_url"
-MAX_LABEL_LENGTH=35
+MAX_LABEL_LENGTH=30
 # Optional control functions (disabled by default)
 flash () {
   local item="$1"

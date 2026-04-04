@@ -230,6 +230,9 @@ case $@ in
 "Reeder")
   icon_result=":reeder5:"
   ;;
+"Claude")
+  icon_result=":claude:"
+  ;;
 "Spotify")
   icon_result=":spotify:"
   ;;
